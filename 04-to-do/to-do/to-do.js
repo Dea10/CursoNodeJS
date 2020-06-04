@@ -12,8 +12,6 @@ const saveDB = () => {
     fs.writeFile('./db/data.json', data, (err) => {
         if (err)
             throw new Error(err)
-        else
-            console.log(`${data} added to data.json`)
     })
 }
 
@@ -43,7 +41,38 @@ const getToDoList = () => {
     return toDoList
 }
 
+const updateTaks = (incomingTask, newStatus = true) => {
+    loadDB()
+
+    let index = toDoList.findIndex(item => item.task === incomingTask)
+
+    if(index >= 0) {
+        toDoList[index].complete = newStatus
+        saveDB()
+        return true
+    } else {
+        return false
+    }
+}
+
+const deleteTask = (incomingTask) => {
+    loadDB()
+
+    let index = toDoList.findIndex(item => item.task === incomingTask)
+
+    if(index >= 0) {
+        let removedTask = toDoList[index]
+        toDoList.splice(index, 1)
+        saveDB()
+        return removedTask
+    } else {
+        return false
+    }
+}
+
 module.exports = {
     createToDoTask,
-    getToDoList
+    getToDoList,
+    updateTaks,
+    deleteTask
 }
