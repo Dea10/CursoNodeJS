@@ -36,8 +36,13 @@ const createToDoTask = (task) => {
     return newTask
 }
 
-const getToDoList = () => {
+const getToDoList = (statusFilter = null) => {
     loadDB()
+
+    if(statusFilter != null){
+            return toDoList.filter(task => task.complete === statusFilter)
+    }
+    
     return toDoList
 }
 

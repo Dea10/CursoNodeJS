@@ -10,12 +10,11 @@ const addNewTask = (newTask) => {
     console.log(toDo.createToDoTask(newTask))
 }
 
-const listTasks = () => {
-    let toDoList = toDo.getToDoList()
+const listTasks = (statusFilter) => {
+    let toDoList = toDo.getToDoList(statusFilter)
 
     console.log(' *** To do list *** \n'.green)
     for(const task of toDoList){
-        // printTask(task)
         console.log(`Task: ${task.task}`)
         console.log(`Status: ${task.complete} \n`)
     }
@@ -36,7 +35,7 @@ switch (argv._[0]) {
         addNewTask(argv.task)
         break;
     case 'list':
-        listTasks()
+        listTasks(argv.complete)
         break;
     case 'update':
         updateTask(argv.task, argv.complete)
