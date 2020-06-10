@@ -1,4 +1,8 @@
+00-pokemon/node_modules/*
+
 03-bases-node/node_modules/*
 03-bases-node/tables/*
 
 04-to-do/node_modules/*
+
+05-clima-mundo/node_modules/*
