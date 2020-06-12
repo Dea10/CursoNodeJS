@@ -2,10 +2,16 @@ const argv = require('./config/yargs').argv
 const location = require('./location/location')
 const weather = require('./weather/weather')
 
-location.getLocation(argv.location)
-  .then(resp => console.log(resp))
-  .catch(err => console.log(err))
+const getInfo = async (input) => {
+  try {
+    const coords = await location.getLocation(input);
+    const res = await weather.getWeather(coords.lon, coords.lat)
+    return `${input} weather: ${res[0].description}`;
+  } catch (error) {
+    return `${input} not found`;
+  }
+}
 
-weather.getWeather(-3.7, 40.42)
+getInfo(argv.location)
   .then(resp => console.log(resp))
   .catch(err => console.log(err))
