@@ -1,3 +1,7 @@
+// list pokemons
+// show pokemon evolutions
+// show posible pokemon colors
+
 const axios = require('axios')
 const argv = require('./config/yargs').argv
     
